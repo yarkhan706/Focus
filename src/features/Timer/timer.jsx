@@ -6,23 +6,23 @@ import {ProgressBar} from 'react-native-paper'
 
 const Timer = ({ focusSubject }) => {
   const [isStarted, setIsStarted] = useState(false);
-  const [progress, setProgress] = useState(1);
+  //const [progress, setProgress] = useState(1);
 
-  const onProgress = (progress) =>{
-    setProgress(progress);
-  }
+//   const onProgress = (progress) =>{
+//     setProgress(progress);
+//   }
 
   return (
     <View style={css.container}>
       <View style={css.countDown}>
-        <CountDown minutes={1} isPaused={!isStarted} onProgress={onProgress} />
+        <CountDown minutes={1} isPaused={!isStarted} />
       </View>
       <View style={css.titleContainer}>
         <Text style={css.title}>Focusing on:</Text>
         <Text style={css.task}>{focusSubject}</Text>
       </View>
       <View style={css.progressContainer}>
-        <ProgressBar progress={progress} color="#45E5A8" style={{height:0.9}}/>
+        {/* <ProgressBar progress={progress} color="#45E5A8" style={{height:0.9}}/> */}
       </View>
       <View style={css.btnContainer}>
         {isStarted ? (
