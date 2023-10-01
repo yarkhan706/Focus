@@ -6,9 +6,9 @@ import { ProgressBar } from "react-native-paper";
 import Timing from "./timing";
 import { useKeepAwake } from "expo-keep-awake";
 
-const DEFAULT_TIME= 0.1;
+const DEFAULT_TIME = 0.1;
 
-const Timer = ({ focusSubject, onTimerEnd }) => {
+const Timer = ({ focusSubject, onTimerEnd, onPressCancel }) => {
   useKeepAwake();
   const [isStarted, setIsStarted] = useState(false);
   const [progress, setProgress] = useState(1);
@@ -16,6 +16,10 @@ const Timer = ({ focusSubject, onTimerEnd }) => {
 
   const onProgress = (progress) => {
     setProgress(progress);
+  };
+
+  const cancelSubject = () => {
+    onPressCancel();
   };
 
   const onEnd = () => {
@@ -85,6 +89,9 @@ const Timer = ({ focusSubject, onTimerEnd }) => {
             />
           )}
         </View>
+        <View style={css.cancelbtn}>
+          <RoundedButton title={"-"} size={50} onPress={cancelSubject} />
+        </View>
       </View>
     </View>
   );
@@ -130,6 +137,11 @@ const css = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+  cancelbtn:{
+    position: "absolute",
+    bottom: 10,
+    left: 20,
+  }
 });
 
 export default Timer;

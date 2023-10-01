@@ -4,9 +4,9 @@ import RoundedButton from "../../components/RoundedButton";
 import { useState } from "react";
 
 const Focus = ({ addSubject }) => {
-  const [tempItem, setTempItem] = useState(null);
+  const [subject, setSubject] = useState(null);
   const onPressHandler = () => {
-    addSubject(tempItem);
+    addSubject(subject);
   };
   return (
     <View style={css.container}>
@@ -16,7 +16,7 @@ const Focus = ({ addSubject }) => {
           <TextInput
             style={{ flex: 1, marginRight: 10 }}
             onSubmitEditing={({ nativeEvent }) => {
-              setTempItem(nativeEvent.text);
+              setSubject(nativeEvent.text);
             }}
           />
           <RoundedButton title={"+"} size={60} onPress={onPressHandler} />
