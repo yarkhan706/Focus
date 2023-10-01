@@ -6,11 +6,13 @@ import { ProgressBar } from "react-native-paper";
 import Timing from "./timing";
 import { useKeepAwake } from "expo-keep-awake";
 
-const Timer = ({ focusSubject }) => {
+const DEFAULT_TIME= 0.1;
+
+const Timer = ({ focusSubject, onTimerEnd }) => {
   useKeepAwake();
   const [isStarted, setIsStarted] = useState(false);
   const [progress, setProgress] = useState(1);
-  const [minutes, setMinutes] = useState(0.1);
+  const [minutes, setMinutes] = useState(DEFAULT_TIME);
 
   const onProgress = (progress) => {
     setProgress(progress);
@@ -18,9 +20,10 @@ const Timer = ({ focusSubject }) => {
 
   const onEnd = () => {
     vibrate();
-    setMinutes(minutes);
+    setMinutes(DEFAULT_TIME);
     setProgress(1);
     setIsStarted(false);
+    onTimerEnd();
   };
 
   const vibrate = () => {
