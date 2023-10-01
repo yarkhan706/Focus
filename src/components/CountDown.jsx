@@ -7,7 +7,7 @@ const minutesToMillisec = (min) => {
 
 const formatTime = (time) => (time < 10 ? `0${time}` : time);
 
-const CountDown = ({ minutes, isPaused, onProgress }) => {
+const CountDown = ({ minutes, isPaused, onProgress,onEnd }) => {
   const interval = React.useRef(null);
   const [millisec, setMillisec] = useState(minutesToMillisec(minutes));
   const minute = Math.floor(millisec / 1000 / 60) % 60;
@@ -16,6 +16,8 @@ const CountDown = ({ minutes, isPaused, onProgress }) => {
   const countDown = () => {
     setMillisec((time) => {
       if (time === 0) {
+        clearInterval(interval.current);
+        onEnd();
         return time;
       }
       const timeLeft = time - 1000;
